@@ -1,0 +1,1 @@
+ALTER TABLE `series` ADD `last_season_release_date` text;

@@ -1,0 +1,106 @@
+.settings-page {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.settings-page .page-head {
+  width: 100%;
+  max-width: 640px;
+  justify-content: center;
+  text-align: center;
+}
+
+.settings-page .page-head {
+  width: 100%;
+}
+
+.page-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.settings-panel {
+  width: 100%;
+  min-width: 0;
+  box-shadow: var(--shadow);
+}
+
+.settings-panel .panel-desc {
+  max-width: 68ch;
+}
+
+.byok-form {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.account-panel {
+  margin-top: 20px;
+}
+
+.password-form .btn {
+  margin-top: 4px;
+}
+
+.panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  max-width: 640px;
+  text-align: left;
+}
+
+.panel h2 {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  margin-bottom: 4px;
+}
+
+.panel .panel-desc {
+  font-size: 13.5px;
+  color: var(--text-dim);
+  margin-bottom: 18px;
+  text-wrap: pretty;
+}
+
+.kv-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13.5px;
+}
+
+.kv-row:last-child {
+  border-bottom: none;
+}
+
+.kv-row .k {
+  color: var(--text-dim);
+}
+
+.kv-row .v {
+  font-weight: 600;
+  color: var(--text);
+  overflow-wrap: anywhere;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 8px;
+}

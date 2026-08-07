@@ -1,0 +1,18 @@
+.loading-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 240px;
+  color: var(--text-dim);
+}
+
+.error-state {
+  display: grid;
+  place-items: center;
+  gap: 8px;
+}
+
+.error-state .btn {
+  margin-top: 8px;
+}

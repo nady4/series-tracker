@@ -1,0 +1,69 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1785746584999,
+      "tag": "0000_colossal_magik",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1785749514547,
+      "tag": "0001_hard_hardball",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1785751767259,
+      "tag": "0002_rename_last_episode_release_date",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1785754132186,
+      "tag": "0003_add_last_episode_numbers",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1785785397384,
+      "tag": "0004_normalize_shared_series_info",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1785807199781,
+      "tag": "0005_checks_rate_limits",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1785807200000,
+      "tag": "0006_verify_byok",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1785807201000,
+      "tag": "0007_session_version",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1785807202000,
+      "tag": "0008_backfill_check_status",
+      "breakpoints": true
+    }
+  ]
+}
