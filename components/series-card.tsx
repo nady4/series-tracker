@@ -148,6 +148,7 @@ export function SeriesCard({ series }: { series: SeriesCardData }) {
             src={series.imageUrl}
             alt={series.name}
             fill
+            loading="eager"
             sizes="(min-width: 640px) 300px, 100vw"
             unoptimized
           />

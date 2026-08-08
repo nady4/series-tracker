@@ -6,6 +6,10 @@
 
 <br>
 
+<p align="center"><img src="./ui.png" alt="Series Tracker UI" width="99%" /></p>
+
+<br>
+
 ## ✨ Features
 
 ### 📺 Tracking
