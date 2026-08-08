@@ -1,7 +1,7 @@
 <h1 align="center">Series Tracker</h1>
 
 <p align="center">
-🍿 TV-show tracker built with Next.js 16 and Drizzle ORM on libsql/Turso. Add shows from TVMaze, get daily automated news checks for new-season announcements and premiere dates analyzed by any OpenAI-compatible LLM. Bring-your-own-key with AES-256-GCM encryption, free-tier cap, and hourly Vercel Cron batches.
+🍿 TV-show tracker built with Next.js 16 and Drizzle ORM on libsql/Turso. Add shows from TVMaze, get daily automated news checks for new-season announcements and premiere dates analyzed by any OpenAI-compatible LLM. Bring-your-own-key with AES-256-GCM encryption, free-tier cap, and hourly GitHub Actions cron batches.
 </p>
 
 <br>
@@ -42,7 +42,7 @@
 
 ### ⚡ Automation
 
-- **Vercel Cron** — `vercel.json` schedules `/api/cron/daily-news` hourly; it claims up to 8 due shows per run (24h interval, 1h retry backoff for failed checks, 10-minute claim timeout so crashed runs don't wedge rows).
+- **GitHub Actions cron** — `.github/workflows/daily-news.yml` calls `/api/cron/daily-news` hourly (Vercel's Hobby plan only allows daily cron jobs, so the schedule lives in GitHub Actions instead). Each run claims up to 8 due shows (24h interval, 1h retry backoff for failed checks, 10-minute claim timeout so crashed runs don't wedge rows).
 - **Queue-less claims** — `checkStatus` + `checkClaimedAt` on the `series` row double as a distributed lock; a manual refresh only runs when nothing is claimed.
 - **Manual refresh API** — `POST /api/series/[id]/refresh` re-runs the full pipeline on demand from the card UI.
 
@@ -78,7 +78,7 @@
 | Styling         | Vanilla CSS with custom-property design tokens                         |
 | Tests           | `node:test` + `tsx`                                                    |
 | Linting         | ESLint `9` (flat config)                                               |
-| Cron            | [Vercel Cron](https://vercel.com/docs/cron-jobs) (hourly)              |
+| Cron            | [GitHub Actions](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule) (hourly) |
 | Package manager | npm                                                                    |
 
 <br>
@@ -87,6 +87,8 @@
 
 ```
 series-tracker/             # This repo
+├── .github/
+│   └── workflows/daily-news.yml   # Hourly cron trigger (CRON_SECRET bearer)
 ├── app/
 │   ├── (app)/              # Authenticated shell
 │   │   ├── page.tsx        # Dashboard (series grid, add panel, empty state)
@@ -128,7 +130,6 @@ series-tracker/             # This repo
 ├── auth.ts                 # NextAuth config (credentials + JWT callbacks)
 ├── next.config.ts          # Security headers, image remote patterns
 ├── drizzle.config.ts
-├── vercel.json             # Hourly cron schedule
 └── package.json
 ```
 
@@ -232,8 +233,17 @@ The app is built for [Vercel](https://vercel.com):
 
 1. Connect the repository and set the environment variables above (a Turso database is required — local files don't survive on serverless).
 2. Deploy; the first build verifies the database connection and image allowlist.
-3. `vercel.json` already registers the hourly cron — verify it appears under **Project → Settings → Cron Jobs**.
-4. Apply schema changes with `npm run db:new-migration` locally, review the SQL in `drizzle/`, then run `npm run db:migrate` (or a hosted migration runner) before or after deploy — installing dependencies never mutates the database.
+3. Apply schema changes with `npm run db:new-migration` locally, review the SQL in `drizzle/`, then run `npm run db:migrate` (or a hosted migration runner) before or after deploy — installing dependencies never mutates the database.
+
+### ⏰ Scheduled news checks (GitHub Actions)
+
+Vercel's Hobby plan limits cron jobs to one run per day, so the hourly batch lives in `.github/workflows/daily-news.yml` instead — it calls `GET /api/cron/daily-news` with the `CRON_SECRET` bearer token. To enable it:
+
+1. Add the **production URL** (e.g. `https://series-tracker.vercel.app`) as a repository **variable** named `PROD_URL` (Settings → Secrets and variables → Actions → Variables).
+2. Add the **same `CRON_SECRET` value you set on Vercel** as a repository **secret** named `CRON_SECRET`.
+3. The workflow runs hourly automatically; you can also trigger it manually from the **Actions** tab (`workflow_dispatch`).
+
+> GitHub pauses scheduled workflows after ~60 days of repository inactivity. If the news stops updating, check the workflow's recent runs first.
 
 ### 🤝 Extending the news engine
 
