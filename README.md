@@ -1,7 +1,10 @@
 <h1 align="center">Series Tracker</h1>
 
 <p align="center">
-🍿 TV-show tracker built with Next.js 16 and Drizzle ORM on libsql/Turso. Add shows from TVMaze, get daily automated news checks for new-season announcements and premiere dates analyzed by any OpenAI-compatible LLM. Bring-your-own-key with AES-256-GCM encryption, free-tier cap, and hourly GitHub Actions cron batches.
+🍿 TV-show tracker that automatically monitors the news for upcoming seasons and premiere dates, using AI to turn scattered announcements into reliable data.
+</p>
+<p align="center">
+Built with Next.js 16 and Drizzle ORM on libsql/Turso. Add shows from TVMaze, get daily automated news checks for new-season announcements and premiere dates analyzed by any OpenAI-compatible LLM. Bring-your-own-key with AES-256-GCM encryption, free-tier cap, and hourly GitHub Actions cron batches.
 </p>
 
 <br>
